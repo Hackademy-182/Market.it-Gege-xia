@@ -1,24 +1,56 @@
-<nav class="nav">
-    <a class="nav__brand" href="{{ url('/') }}">Marketplace</a>
+<body class="pt-5">
 
-    <form class="nav__search" action="{{ route('vehicles.index') }}" method="GET">
-        <input class="nav__input" type="text" name="q" value="{{ request('q') }}"
-            placeholder="Cerca: Panda, Yamaha, barca...">
-        <button class="nav__btn" type="submit">Cerca</button>
-    </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{ route('vehicles.index') }}">Marketplace</a>
 
-    <div class="nav__links">
-        <a class="nav__link nav__sell" href="{{ route('vehicles.create') }}">Vendi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        @auth
-            <span class="nav__hello">Ciao, {{ auth()->user()->name }}</span>
-            <form action="{{ route('logout') }}" method="POST" class="nav__inline">
-                @csrf
-                <button class="nav__link" type="submit">Logout</button>
-            </form>
-        @else
-            <a class="nav__link" href="{{ route('login') }}">Login</a>
-            <a class="nav__link" href="{{ route('register') }}">Register</a>
-        @endauth
-    </div>
-</nav>
+            <div class="collapse navbar-collapse" id="navMain">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('vehicles.index') }}">Annunci</a>
+                    </li>
+
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('vehicles.create') }}">Vendi</a>
+                        </li>
+                    @endauth
+                </ul>
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
+                    @endguest
+
+                    @auth
+                        <li class="nav-item">
+                            <span class="navbar-text me-2">
+                                Ciao, {{ auth()->user()->name }}
+                            </span>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="btn btn-outline-light btn-sm" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    @endauth
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container pt-4">
+        {{ $slot }}
+    </main>
+
+</body>

@@ -29,4 +29,21 @@ class VehicleController extends Controller
 
         return view('vehicles.show', compact('vehicle'));
     }
+
+    public function create()
+    {
+        return view('vehicles.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:120'],
+            'type' => ['required', 'in:auto,moto,barca,motoscafo'],
+            'price' => ['required', 'integer', 'min:0'],
+            'city' => ['required', 'string', 'max:80'],
+        ]);
+
+        return redirect()->route('vehicles.index')->with('success', 'Annuncio inviato (demo).');
+    }
 }
