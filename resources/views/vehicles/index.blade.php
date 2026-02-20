@@ -1,8 +1,10 @@
 <x-layouts.app title="Annunci">
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
@@ -15,9 +17,7 @@
             <a class="btn btn-primary btn-lg" href="{{ route('vehicles.create') }}">+ Vendi</a>
         @endauth
 
-        @guest
-            <a class="btn btn-outline-primary btn-lg" href="{{ route('login') }}">Accedi per vendere</a>
-        @endguest
+
     </div>
 
     <div class="row g-3">

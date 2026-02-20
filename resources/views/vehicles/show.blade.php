@@ -25,7 +25,15 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->check() && (int) $vehicle->user_id === (int) auth()->id())
+                <a class="btn btn-outline-primary" href="{{ route('vehicles.edit', $vehicle->id) }}">Modifica</a>
 
+                <form method="POST" action="{{ route('vehicles.destroy', $vehicle->id) }}" class="d-inline">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-outline-danger" type="submit">Cancella</button>
+                </form>
+            @endif
             <hr class="my-4">
 
             <div class="d-flex gap-2">
