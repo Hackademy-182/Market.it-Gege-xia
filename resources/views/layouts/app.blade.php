@@ -9,8 +9,6 @@
 </head>
 
 <body>
-    @include('partials.nav')
-
     <main class="container">
         {{ $slot }}
     </main>
