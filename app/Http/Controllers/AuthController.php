@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,30 @@ class AuthController extends Controller
         $request->session()->regenerate();
 
         return redirect()->intended(route('vehicles.create'));
+    }
+
+    public function editProfile()
+    {
+        return view('profile.edit');
+    }
+
+    public function storeProfile(Request $request)
+    {
+        $data = $request->validate([
+            'first_name' => ['nullable', 'string', 'max:80'],
+            'last_name' => ['nullable', 'string', 'max:80'],
+            'country' => ['nullable', 'string', 'max:80'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'postal_code' => ['nullable', 'string', 'max:30'],
+            'phone' => ['nullable', 'string', 'max:40'],
+        ]);
+
+        Profile::updateOrCreate(
+            ['user_id' => Auth::id()],
+            $data
+        );
+
+        return back()->with('success', 'Profilo salvato!');
     }
 
     public function logout(Request $request)

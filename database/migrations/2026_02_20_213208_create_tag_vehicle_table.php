@@ -10,11 +10,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function ($table) {
+        Schema::create('tag_vehicle', function ($table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->foreignId('vehicle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
+
+            $table->unique(['vehicle_id', 'tag_id']);
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('tag_vehicle');
     }
 };

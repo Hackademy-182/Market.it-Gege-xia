@@ -16,7 +16,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.st
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
-
+    Route::get('/profile', [AuthController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile', [AuthController::class, 'storeProfile'])->name('profile.store');
     Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicles.create');
     Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
     Route::get('/vehicles/{vehicle}/edit', [VehicleController::class, 'edit'])->name('vehicles.edit');

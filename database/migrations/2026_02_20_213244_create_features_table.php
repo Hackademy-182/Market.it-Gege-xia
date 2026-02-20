@@ -10,7 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function ($table) {
+        Schema::create('features', function ($table) {
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('features');
     }
 };

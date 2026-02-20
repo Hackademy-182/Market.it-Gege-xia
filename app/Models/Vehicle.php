@@ -14,4 +14,19 @@ class Vehicle extends Model
         'city',
         'views',
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function features()
+    {
+        return $this->belongsToMany(Feature::class);
+    }
+
+    public function boatDetail()
+    {
+        return $this->hasOne(BoatDetail::class);
+    }
 }
