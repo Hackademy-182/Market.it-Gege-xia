@@ -31,7 +31,9 @@
             <div class="d-flex gap-2">
                 <a class="btn btn-outline-dark" href="{{ route('vehicles.index') }}">Torna</a>
                 @auth
-                    <a class="btn btn-primary" href="{{ route('vehicles.create') }}">Pubblica un annuncio</a>
+                    @if ($vehicle->user_id === auth()->id())
+                        <a class="btn btn-outline-primary" href="{{ route('vehicles.edit', $vehicle) }}">Modifica</a>
+                    @endif
                 @endauth
             </div>
         </div>

@@ -66,7 +66,6 @@
         <div class="card border-0 shadow-sm rounded-4 mb-4">
             <div class="card-body">
                 <div class="text-muted">
-                    Preferiti ancora vuoti (demo). Tra poco li colleghiamo al DB.
                 </div>
             </div>
         </div>
