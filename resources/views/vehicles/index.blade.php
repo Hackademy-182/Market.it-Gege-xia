@@ -1,16 +1,22 @@
 <x-layouts.app title="Annunci">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
         <div>
             <h1 class="h3 fw-bold mb-1">Annunci</h1>
-            <p class="text-muted mb-0">Auto, moto, barche e motoscafi</p>
+            <div class="text-muted">Auto • Moto • Barche • Motoscafi</div>
         </div>
 
         @auth
-            <a class="btn btn-primary" href="{{ route('vehicles.create') }}">+ Vendi</a>
+            <a class="btn btn-primary btn-lg" href="{{ route('vehicles.create') }}">+ Vendi</a>
         @endauth
 
         @guest
-            <a class="btn btn-outline-primary" href="{{ route('login') }}">Accedi per vendere</a>
+            <a class="btn btn-outline-primary btn-lg" href="{{ route('login') }}">Accedi per vendere</a>
         @endguest
     </div>
 
@@ -18,19 +24,19 @@
         @foreach ($vehicles as $v)
             <div class="col-12 col-md-6 col-lg-4">
                 <a href="{{ route('vehicles.show', $v['id']) }}" class="text-decoration-none">
-                    <div class="card h-100 shadow-sm border-0">
+                    <div class="card h-100 border-0 shadow-sm">
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <span class="badge text-bg-secondary text-uppercase">{{ $v['type'] }}</span>
-                                <span class="fw-bold">€ {{ $v['price'] }}</span>
+                                <span class="fw-bold fs-5">€ {{ $v['price'] }}</span>
                             </div>
 
                             <h2 class="h5 fw-semibold text-dark mb-2">{{ $v['title'] }}</h2>
-                            <p class="text-muted mb-0">{{ $v['city'] }}</p>
+                            <div class="text-muted">{{ $v['city'] }}</div>
                         </div>
 
                         <div class="card-footer bg-white border-0 pt-0">
-                            <span class="btn btn-sm btn-outline-dark w-100">Vedi dettaglio</span>
+                            <span class="btn btn-outline-dark btn-sm w-100">Vedi dettaglio</span>
                         </div>
                     </div>
                 </a>
